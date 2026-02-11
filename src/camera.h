@@ -8,6 +8,8 @@ class camera
         double aspect_ratio = 1;
         int image_width = 100;
         int samples_per_pixel = 10;
+        int max_depth = 10;
+        color background;
 
         
         void render(const hittable& world)
@@ -25,7 +27,7 @@ class camera
                     for (int sample = 0; sample < samples_per_pixel; sample++)
                     {
                         ray r = get_ray(i, j);
-                        pixel_color += ray_color(r, world);
+                        pixel_color += ray_color(r, max_depth, world);
                     }
         
                     write_color(std::cout, pixel_samples_scale * pixel_color);
@@ -64,17 +66,24 @@ class camera
             pixel00_loc = viewport_top_left + 0.5 * (pixel_delta_u + pixel_delta_v);
         }
         
-        color ray_color(const ray& r, const hittable& world) const
+        color ray_color(const ray& r, int depth, const hittable& world) const
         {
-            hit_record rec;
-            if (world.hit(r, interval(0, infinity), rec))
+            if (depth <= 0)
             {
-                return 0.5 * (rec.normal + color(1,1,1));
+                return color(0,0,0);
             }
             
-            vec3 unit_direction = normalize(r.direction());
-            auto a = 0.5*(unit_direction.y() + 1.0);
-            return (1.0-a)*color(1.0, 1.0, 1.0) + a*color(0.5, 0.7, 1.0);
+            hit_record rec;
+            
+            if (!world.hit(r, interval(0, infinity), rec))
+            {
+                return background;            
+            }
+            
+            // vec3 unit_direction = normalize(r.direction());
+            // auto a = 0.5*(unit_direction.y() + 1.0);
+            // return (1.0-a)*color(1.0, 1.0, 1.0) + a*color(0.5, 0.7, 1.0);
+            return 0.5 * (rec.normal + color(1,1,1));
         }
         
         ray get_ray(int i, int j)

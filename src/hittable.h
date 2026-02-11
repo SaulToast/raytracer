@@ -1,6 +1,7 @@
 #pragma once
 
 #include "interval.h"
+#include "material.h"
 #include "ray.h"
 
 class hit_record
@@ -10,6 +11,7 @@ class hit_record
         vec3 normal;
         double t;
         bool front_face;
+        const material* material;
         
         void set_face_normal(const ray& r, const vec3& outward_normal)
         {
