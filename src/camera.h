@@ -2,6 +2,10 @@
 
 #include "general.h"
 #include "hittable.h"
+#include "world.h"
+#include <algorithm>
+#include <cmath>
+
 class camera
 {
     public:
@@ -12,7 +16,7 @@ class camera
         color background;
 
         
-        void render(const hittable& world)
+        void render(const world& world)
         {
             initialize();
             
@@ -66,7 +70,7 @@ class camera
             pixel00_loc = viewport_top_left + 0.5 * (pixel_delta_u + pixel_delta_v);
         }
         
-        color ray_color(const ray& r, int depth, const hittable& world) const
+        color ray_color(const ray& r, int depth, const world& world) const
         {
             if (depth <= 0)
             {
@@ -75,15 +79,21 @@ class camera
             
             hit_record rec;
             
-            if (!world.hit(r, interval(0, infinity), rec))
+            if (!world.objects.hit(r, interval(0, infinity), rec))
             {
                 return background;            
             }
             
-            // vec3 unit_direction = normalize(r.direction());
-            // auto a = 0.5*(unit_direction.y() + 1.0);
-            // return (1.0-a)*color(1.0, 1.0, 1.0) + a*color(0.5, 0.7, 1.0);
-            return 0.5 * (rec.normal + color(1,1,1));
+            
+            light light1 = world.lights.at(0);
+            auto ambient = rec.material->ka * rec.material->od * light1.ambient_light;
+            auto diffuse = rec.material->kd * rec.material->od * light1.light_color * fmax(dot(rec.normal, light1.light_direction), 0);
+            auto reflected = 2 * dot(rec.normal, light1.light_direction) * rec.normal - light1.light_direction;
+            auto direction_to_cam = normalize(-r.direction());
+            auto specular = rec.material->ks * rec.material->os * pow(fmax(dot(reflected, direction_to_cam), 0), rec.material->shininess);
+            return ambient + diffuse + specular;
+            
+            
         }
         
         ray get_ray(int i, int j)

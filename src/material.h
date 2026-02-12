@@ -1,5 +1,6 @@
 #pragma once
 
+#include "color.h"
 #include "vec3.h"
 
 struct material
@@ -11,6 +12,7 @@ struct material
 
 struct light
 {
-    virtual vec3 direction_from(const point3& p) const = 0;
-    virtual vec3 intensity() const = 0;
+    vec3 light_direction;
+    color light_color;
+    color ambient_light;
 };

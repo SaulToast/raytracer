@@ -3,16 +3,16 @@
     "look_at": [0.0, 0.0, 0.0],
     "look_from": [0.0, 0.0, 1.0],
     "look_up": [0.0, 1.0, 0.0],
-    "field_of_view": 90.0
+    "field_of_view": 90.0,
+    "background_color": [0.2, 0.2, 0.2]
   },
 
-  "lighting": {
+  "light": {
     "direction_to_light": [0.0, 1.0, 0.0],
     "light_color": [1.0, 1.0, 1.0],
     "ambient_light": [0.0, 0.0, 0.0]
   },
 
-  "background_color": [0.2, 0.2, 0.2],
 
   "objects": [
     {
