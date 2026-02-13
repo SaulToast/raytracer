@@ -98,19 +98,41 @@ class camera
                 return background;            
             }
             
+            auto a = world.lights.at(0).ambient_light;
+            color final_color = rec.material->ka * rec.material->od * a;
             
-            light light1 = world.lights.at(0);
-            
-            auto L = normalize(light1.light_direction);
+            auto hit_point = r.at(rec.t);
             auto N = rec.normal;
             
-            auto ambient = rec.material->ka * rec.material->od * light1.ambient_light;
-            auto diffuse = rec.material->kd * rec.material->od * light1.light_color * fmax(dot(N, L), 0);
-            auto reflected = normalize(2 * dot(N, L) * N - L);
-            auto direction_to_cam = normalize(-r.direction());
-            auto specular = rec.material->ks * rec.material->os * pow(fmax(dot(reflected, direction_to_cam), 0), rec.material->shininess);
-            return ambient + diffuse + specular;
-            
+            for (const auto& light : world.lights)
+            {
+                const double offset = 1e-4;
+                point3 shadow_origin = hit_point + offset * N;
+                auto L = normalize(light.light_direction);
+                ray shadow_ray(shadow_origin, L);
+                hit_record shadow_rec;
+                
+                if (!world.objects.hit(shadow_ray, interval(0, infinity), shadow_rec))
+                {
+                    auto diffuse = rec.material->kd * rec.material->od * light.light_color * fmax(dot(N, L), 0);
+                    auto reflected = normalize(2 * dot(N, L) * N - L);
+                    auto direction_to_cam = normalize(-r.direction());
+                    auto specular = rec.material->ks * rec.material->os * pow(fmax(dot(reflected, direction_to_cam), 0), rec.material->shininess);
+                    
+                    final_color += diffuse + specular;
+                }
+                
+                if (rec.material->ks > 0)
+                {
+                    point3 reflection_ray_origin = hit_point + offset * N;
+                    vec3 reflection_direction = normalize(r.direction() - 2 * dot(r.direction(), N) * N);
+                    ray reflected_ray(reflection_ray_origin, reflection_direction);
+                    final_color += rec.material->ks * ray_color(reflected_ray, depth - 1, world);
+                }
+                
+
+            }
+            return final_color;
             
         }
         
