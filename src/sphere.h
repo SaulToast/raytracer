@@ -9,6 +9,7 @@ class sphere : public hittable
     public:
         sphere(const point3& center, double radius, material mat) : center(center), radius(std::fmax(0,radius)), mat(mat) {}
         
+        
         bool hit(const ray& r, interval ray_t, hit_record& rec) const override
         {
             vec3 oc = center - r.origin();
@@ -45,3 +46,12 @@ class sphere : public hittable
         double radius;
         material mat;
 };
+
+inline sphere parse_sphere(const json& j)
+{
+    auto center = point3(j["center"][0], j["center"][1], j["center"][2]);
+    auto radius = j["radius"];
+    auto mat = parse_material(j["material"]);
+    
+    return sphere(center, radius, mat);
+}
