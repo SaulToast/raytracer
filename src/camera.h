@@ -100,9 +100,13 @@ class camera
             
             
             light light1 = world.lights.at(0);
+            
+            auto L = normalize(light1.light_direction);
+            auto N = rec.normal;
+            
             auto ambient = rec.material->ka * rec.material->od * light1.ambient_light;
-            auto diffuse = rec.material->kd * rec.material->od * light1.light_color * fmax(dot(rec.normal, light1.light_direction), 0);
-            auto reflected = 2 * dot(rec.normal, light1.light_direction) * rec.normal - light1.light_direction;
+            auto diffuse = rec.material->kd * rec.material->od * light1.light_color * fmax(dot(N, L), 0);
+            auto reflected = normalize(2 * dot(N, L) * N - L);
             auto direction_to_cam = normalize(-r.direction());
             auto specular = rec.material->ks * rec.material->os * pow(fmax(dot(reflected, direction_to_cam), 0), rec.material->shininess);
             return ambient + diffuse + specular;

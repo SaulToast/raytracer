@@ -3,6 +3,7 @@
 #include "interval.h"
 #include "material.h"
 #include "ray.h"
+#include <memory>
 
 class hit_record
 {
