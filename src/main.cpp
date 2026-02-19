@@ -28,11 +28,10 @@ int main(int argc, char* argv[]) {
     // World
     hittable_list objects;
     std::vector<light> lights;
-    light l = parse_light(data["light"]);
     
     world world1;
     world1.objects = parse_objects(data["objects"]);
-    world1.lights.push_back(l);
+    world1.lights = parse_lights(data["lights"]);
 
     // Camera
     camera cam = parse_camera(data["camera"]);

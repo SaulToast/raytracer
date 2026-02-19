@@ -4,6 +4,7 @@
 #include "vec3.h"
 
 #include <fstream>
+#include <vector>
 #include "json.hpp"
 
 using json = nlohmann::json;
@@ -54,4 +55,14 @@ inline light parse_light(const json& j)
                             j["ambient_light"][2]);
     
     return l;
+}
+
+inline std::vector<light> parse_lights(const json& j)
+{
+    std::vector<light> lights;
+    
+    for (const json& light : j)
+        lights.push_back(parse_light(light));
+        
+    return lights;
 }

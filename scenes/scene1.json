@@ -7,12 +7,13 @@
     "background_color": [0.2, 0.2, 0.2]
   },
 
-  "light": {
-    "direction_to_light": [0.0, 1.0, 0.0],
-    "light_color": [1.0, 1.0, 1.0],
-    "ambient_light": [0.0, 0.0, 0.0]
-  },
-
+  "lights": [
+    {
+      "direction_to_light": [0.0, 1.0, 0.0],
+      "light_color": [1.0, 1.0, 1.0],
+      "ambient_light": [0.0, 0.0, 0.0]
+    }
+  ],
 
   "objects": [
     {
