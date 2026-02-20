@@ -51,6 +51,7 @@ inline sphere parse_sphere(const json& j)
     auto center = point3(j["center"][0], j["center"][1], j["center"][2]);
     auto radius = j["radius"];
     auto mat = parse_material(j["material"]);
+    std::clog << "Done parsing sphere\n";
     
     return sphere(center, radius, mat);
 }

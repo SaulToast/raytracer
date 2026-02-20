@@ -3,6 +3,7 @@
 #include "hittable.h"
 #include "interval.h"
 #include "sphere.h"
+#include "tri.h"
 
 #include <memory>
 #include <stdexcept>
@@ -49,8 +50,11 @@ class hittable_list : public hittable
 inline std::shared_ptr<hittable> parse_object(const json& obj)
 {
     const std::string type = obj.at("type");
+    std::clog << "parsing object type: " << type << '\n';
     if (type == "sphere")
         return make_shared<sphere>(parse_sphere(obj));
+    if (type == "triangle")
+        return make_shared<tri>(parse_tri(obj));
     
     throw std::runtime_error("unknown object type: " + type);
 }

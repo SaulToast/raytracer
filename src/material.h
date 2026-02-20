@@ -14,6 +14,7 @@ struct material
     double kd, ks, ka;
     vec3 od, os;
     double shininess;
+    double refl;
 };
 
 struct light
@@ -26,13 +27,15 @@ struct light
 inline material parse_material(const json& j)
 {
     material m;
-    
+    std::clog << "Parsing material\n";
     m.ka = j["ka"];
     m.ks = j["ks"];
     m.kd = j["kd"];
     m.od = color(j["od"][0], j["od"][1], j["od"][2]);
     m.os = color(j["os"][0], j["os"][1], j["os"][2]);
     m.shininess = j["kgls"];
+    m.refl = j["refl"];
+    std::clog << "done parsing material\n";
     
     return m;
 }

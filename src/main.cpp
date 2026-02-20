@@ -30,7 +30,10 @@ int main(int argc, char* argv[]) {
     std::vector<light> lights;
     
     world world1;
+    std::clog << "parsing objects\n";
     world1.objects = parse_objects(data["objects"]);
+    
+    std::clog << "parsing lights\n";
     world1.lights = parse_lights(data["lights"]);
 
     // Camera

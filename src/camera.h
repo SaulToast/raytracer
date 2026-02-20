@@ -122,12 +122,12 @@ class camera
                     final_color += diffuse + specular;
                 }
                 
-                if (rec.material->ks > 0)
+                if (rec.material->refl > 0)
                 {
                     point3 reflection_ray_origin = hit_point + offset * N;
                     vec3 reflection_direction = normalize(r.direction() - 2 * dot(r.direction(), N) * N);
                     ray reflected_ray(reflection_ray_origin, reflection_direction);
-                    final_color += rec.material->ks * ray_color(reflected_ray, depth - 1, world);
+                    final_color = (1-rec.material->refl) * final_color + rec.material->refl * ray_color(reflected_ray, depth - 1, world);
                 }
                 
 

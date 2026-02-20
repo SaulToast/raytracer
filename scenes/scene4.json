@@ -8,9 +8,9 @@
   },
   "lights": [
     {
-      "direction": [0.0, 1.0, 0.0],
-      "color": [1.0, 1.0, 1.0],
-      "ambient": [0.0, 0.0, 0.0]
+      "direction_to_light": [0.0, 1.0, 0.0],
+      "light_color": [1.0, 1.0, 1.0],
+      "ambient_light": [0.0, 0.0, 0.0]
     }
   ],
   "objects": [
@@ -24,8 +24,8 @@
         "ka": 0.1,
         "od": [0.75, 0.75, 0.75],
         "os": [1.0, 1.0, 1.0],
-        "shininess": 10.0,
-        "reflectiveness": 0.9
+        "kgls": 10.0,
+        "refl": 0.9
       }
     },
     {
@@ -39,8 +39,8 @@
         "ka": 0.1,
         "od": [0.0, 0.0, 1.0],
         "os": [1.0, 1.0, 1.0],
-        "shininess": 4.0,
-        "reflectiveness": 0.0
+        "kgls": 4.0,
+        "refl": 0.0
       }
     },
     {
@@ -54,8 +54,8 @@
         "ka": 0.1,
         "od": [1.0, 1.0, 0.0],
         "os": [1.0, 1.0, 1.0],
-        "shininess": 4.0,
-        "reflectiveness": 0.0
+        "kgls": 4.0,
+        "refl": 0.0
       }
     }
   ]
