@@ -1,81 +1,119 @@
 {
   "camera": {
     "look_at": [0.0, 0.0, 0.0],
-    "look_from": [0.0, 0.0, 1.0],
+    "look_from": [0.0, 0.8, 2.2],
     "look_up": [0.0, 1.0, 0.0],
-    "field_of_view": 90.0,
-    "background_color": [0.5, 0.7, 1.0]
+    "field_of_view": 70.0,
+    "background_color": [0.74, 0.878, 0.996]
   },
 
   "lights": [
     {
-      "direction_to_light": [1.0, 1.0, 1.0],
-      "light_color": [0.5, 0.5, 0.5],
+      "direction_to_light": [1.0, 1.0, 0.5],
+      "light_color": [1.0, 0.95, 0.9],
       "ambient_light": [0.1, 0.1, 0.1]
     },
     {
-      "direction_to_light": [0.0, 1.0, 0.0],
-      "light_color": [1.0, 0.7, 0.5],
+      "direction_to_light": [-1.0, 0.5, -0.2],
+      "light_color": [0.4, 0.6, 1.0],
       "ambient_light": [0.0, 0.0, 0.0]
     }
   ],
 
-
   "objects": [
     {
       "type": "sphere",
-      "name": "white sphere",
-      "center": [0.45, 0.0, -0.15],
-      "radius": 0.15,
-      "material": {
-        "kd": 0.8,
-        "ks": 0.1,
-        "ka": 0.3,
-        "od": [1.0, 1.0, 1.0],
-        "os": [1.0, 1.0, 1.0],
-        "kgls": 4.0
-      }
-    },
-    {
-      "type": "sphere",
-      "name": "red sphere",
-      "center": [0.0, 0.0, -0.1],
-      "radius": 0.2,
+      "name": "central_sphere",
+      "center": [0.0, 0.0, 0.0],
+      "radius": 0.45,
       "material": {
         "kd": 0.6,
         "ks": 0.3,
         "ka": 0.1,
-        "od": [1.0, 0.0, 0.0],
+        "od": [0.9, 0.9, 0.9],
         "os": [1.0, 1.0, 1.0],
-        "kgls": 32.0
+        "kgls": 64.0,
+        "refl": 0.0
       }
     },
+
     {
       "type": "sphere",
-      "name": "green sphere",
-      "center": [-0.6, 0.0, 0.0],
-      "radius": 0.3,
+      "name": "orbit_red",
+      "center": [0.8, 0.1, 0.0],
+      "radius": 0.12,
       "material": {
         "kd": 0.7,
         "ks": 0.2,
         "ka": 0.1,
-        "od": [0.0, 1.0, 0.0],
-        "os": [0.5, 1.0, 0.5],
-        "kgls": 64.0
+        "od": [1.0, 0.686, 0.8],
+        "os": [1.0, 1.0, 1.0],
+        "kgls": 16.0,
+        "refl": 0.0
       }
     },
+
     {
       "type": "sphere",
-      "name": "ground",
-      "center": [0.0, -10000.5, 0.0],
-      "radius": 10000.0,
+      "name": "orbit_green",
+      "center": [-0.6, -0.2, 0.4],
+      "radius": 0.1,
       "material": {
-        "kd": 0.9,
+        "kd": 0.8,
         "ks": 0.1,
         "ka": 0.1,
-        "od": [0.2, 0.2, 0.5],
+        "od": [0.2, 1.0, 0.3],
+        "os": [0.5, 1.0, 0.5],
+        "kgls": 8.0,
+        "refl": 0.0
+      }
+    },
+
+    {
+      "type": "sphere",
+      "name": "orbit_blue_glossy",
+      "center": [0.0, 0.6, -0.5],
+      "radius": 0.09,
+      "material": {
+        "kd": 0.3,
+        "ks": 0.6,
+        "ka": 0.1,
+        "od": [0.2, 0.4, 1.0],
         "os": [1.0, 1.0, 1.0],
-        "kgls": 1.0
+        "kgls": 64.0,
+        "refl": 0.1
+      }
+    },
+
+    {
+      "type": "sphere",
+      "name": "orbit_reflective",
+      "center": [-0.9, 0.3, -0.2],
+      "radius": 0.11,
+      "material": {
+        "kd": 0.2,
+        "ks": 0.2,
+        "ka": 0.1,
+        "od": [1.0, 0.9, 0.3],
+        "os": [1.0, 1.0, 1.0],
+        "kgls": 32.0,
+        "refl": 0.6
+      }
+    },
+
+    {
+      "type": "sphere",
+      "name": "orbit_purple_matte",
+      "center": [0.4, -0.6, 0.6],
+      "radius": 0.08,
+      "material": {
+        "kd": 0.9,
+        "ks": 0.05,
+        "ka": 0.05,
+        "od": [0.7, 0.3, 0.9],
+        "os": [0.5, 0.5, 0.5],
+        "kgls": 4.0,
+        "refl": 0.0
       }
     }
   ]

@@ -112,15 +112,15 @@ class camera
                 ray shadow_ray(shadow_origin, L);
                 hit_record shadow_rec;
                 
-                if (!world.objects.hit(shadow_ray, interval(0, infinity), shadow_rec))
-                {
+                // if (!world.objects.hit(shadow_ray, interval(0, infinity), shadow_rec))
+                // {
                     auto diffuse = rec.material->kd * rec.material->od * light.light_color * fmax(dot(N, L), 0);
                     auto reflected = normalize(2 * dot(N, L) * N - L);
                     auto direction_to_cam = normalize(-r.direction());
                     auto specular = rec.material->ks * rec.material->os * pow(fmax(dot(reflected, direction_to_cam), 0), rec.material->shininess);
                     
                     final_color += diffuse + specular;
-                }
+                // }
                 
                 if (rec.material->refl > 0)
                 {

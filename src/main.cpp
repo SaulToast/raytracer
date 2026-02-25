@@ -42,6 +42,7 @@ int main(int argc, char* argv[]) {
     cam.aspect_ratio = 1.0;
     cam.image_width = 500;
     cam.samples_per_pixel = 100;
+    cam.max_depth = 3; //increase for refelction
     
     cam.render(world1);
 
