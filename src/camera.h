@@ -20,13 +20,16 @@ class camera
         point3 look_at;
         vec3 look_up;
         double fov;
+        std::string filename;
 
         
         void render(const world& world)
         {
             initialize();
             
-            std::cout << "P3\n" << image_width << ' ' << image_height << "\n255\n";
+            std::ofstream out(filename, std::ios::out | std::ios::binary);
+            
+            out << "P3\n" << image_width << ' ' << image_height << "\n255\n";
         
             for (int j = 0; j < image_height; j++)
             {
@@ -40,7 +43,7 @@ class camera
                         pixel_color += ray_color(r, max_depth, world);
                     }
         
-                    write_color(std::cout, pixel_samples_scale * pixel_color);
+                    write_color(out, pixel_samples_scale * pixel_color);
                 }
             }
         

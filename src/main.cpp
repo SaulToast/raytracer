@@ -13,9 +13,9 @@ using json = nlohmann::json;
 
 int main(int argc, char* argv[]) {
     
-    if (argc < 2)
+    if (argc < 3)
     {
-        std::cerr << "Usage: raytracer <scenes/scene.json>\n";
+        std::cerr << "Usage: raytracer <scenes/scene.json> <output_filename>\n";
         return 1;
     }
     
@@ -43,6 +43,7 @@ int main(int argc, char* argv[]) {
     cam.image_width = 500;
     cam.samples_per_pixel = 100;
     cam.max_depth = 3; //increase for refelction
+    cam.filename = argv[2];
     
     cam.render(world1);
 
